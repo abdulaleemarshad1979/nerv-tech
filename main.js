@@ -16,7 +16,8 @@
 
   // Mobile menu
   const burger = $('#burger'), links = $('#links');
-  const setMenu = o => { burger.setAttribute('aria-expanded', o); links.classList.toggle('open', o); };
+  let onMenu = () => {}; // replaced with Lenis stop/start once Lenis exists
+  const setMenu = o => { burger.setAttribute('aria-expanded', o); links.classList.toggle('open', o); document.documentElement.classList.toggle('menu-open', o); onMenu(o); };
   burger.addEventListener('click', () => setMenu(burger.getAttribute('aria-expanded') !== 'true'));
 
   // Product panels (Drone / TRACK / CCTV): one visible at a time; switched by tabs, hero strip and cards.
@@ -50,6 +51,7 @@
   // ---------- Smooth scroll (Lenis + ScrollTrigger, same stack as the reference sites)
   const lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 1 });
   lenis.on('scroll', ScrollTrigger.update);
+  onMenu = o => (o ? lenis.stop() : lenis.start());
   gsap.ticker.add(t => lenis.raf(t * 1000));
   gsap.ticker.lagSmoothing(0);
   $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
@@ -111,13 +113,9 @@
     gsap.to(o, { v: +el.dataset.to, duration: 1.8, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 90%' }, onUpdate: () => (el.textContent = Math.round(o.v)) });
   });
 
-  // ---------- Nav: hide on scroll down, glass after 40px, active link by section
+  // ---------- Nav: always visible (sticky), glass after 40px, active link by section
   const nav = $('.nav');
-  lenis.on('scroll', ({ scroll, direction }) => {
-    nav.classList.toggle('scrolled', scroll > 40);
-    const hide = direction === 1 && scroll > 300;
-    if (hide !== nav._h) { nav._h = hide; gsap.to(nav, { top: hide ? -nav.offsetHeight - 2 : 0, duration: .5, ease: 'power3.out', overwrite: true }); }
-  });
+  lenis.on('scroll', ({ scroll }) => nav.classList.toggle('scrolled', scroll > 40));
   const map = { home: 'home', work: 'work', product: 'work', capabilities: 'work', about: 'about', trusted: 'about', contact: 'contact' };
   Object.keys(map).forEach(id => ScrollTrigger.create({
     trigger: '#' + id, start: 'top 50%', end: 'bottom 50%',
@@ -155,5 +153,5 @@
     .fromTo('.hero-scene', { scale: 1.12, opacity: 0 }, { scale: 1, opacity: 1, duration: 2.2, ease: 'expo.out' })
     .to('[data-hero-title] .ln>span', { y: 0, yPercent: 0, duration: 1.2, ease: 'expo.out', stagger: .12 }, '<+.1')
     .to('[data-fade]', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: .1 }, '<+.3')
-    .fromTo('.nav', { top: -100, opacity: 0 }, { top: 0, opacity: 1, duration: 1, ease: 'expo.out' }, '<');
+    .fromTo('.nav', { opacity: 0 }, { opacity: 1, duration: .8, ease: 'power2.out' }, 0); // fade only: nav position is never animated
 })();

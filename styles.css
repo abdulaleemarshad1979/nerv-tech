@@ -30,10 +30,14 @@ em{font-style:normal;color:var(--accent)}
 .vr{width:1px;align-self:stretch;background:var(--line)}
 
 /* nav */
-.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:36px var(--gut);transition:background .4s,backdrop-filter .4s,padding .4s}
-.nav.scrolled{padding-top:16px;padding-bottom:16px;background:rgba(13,16,19,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.logo{display:flex;align-items:center;gap:19px;font-weight:800;font-size:clamp(20px,1.75vw,26px);letter-spacing:-.015em}
-.logo-mark{width:42px;height:23px;color:var(--accent)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:36px var(--gut);transition:padding .4s}
+/* glass bg on ::before: backdrop-filter on .nav itself would make it the containing block of the fixed mobile menu */
+.nav::before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(13,16,19,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);opacity:0;transition:opacity .4s}
+.nav.scrolled{padding-top:16px;padding-bottom:16px}
+.nav.scrolled::before{opacity:1}
+html.menu-open{overflow:hidden}
+.logo{display:flex;align-items:center;gap:clamp(10px,.95vw,14px);font-family:'Orbitron',var(--f);font-weight:800;font-size:clamp(16px,1.45vw,21px);letter-spacing:.03em;line-height:1}
+.logo-mark{width:clamp(36px,2.9vw,42px);height:auto;aspect-ratio:296/253;color:#f2f2f2}
 .links{display:flex;gap:clamp(28px,4vw,58px);position:absolute;left:50%;transform:translateX(-50%)}
 .links a{position:relative;font-size:clamp(16px,1.25vw,18px);font-weight:500;padding:6px 0;color:#e6e7e9;transition:color .3s}
 .links a::after{content:"";position:absolute;left:0;right:0;bottom:-14px;height:2.5px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
@@ -210,7 +214,7 @@ em{font-style:normal;color:var(--accent)}
 .b-wrap{position:relative;height:100%;container-type:inline-size}
 .b-img{position:relative;height:100%;width:100%;filter:drop-shadow(-30px 30px 50px rgba(0,0,0,.55))}
 /* lettering on the lit concrete face; skewY matches that face's edge angle in building.webp (~-29deg) */
-.b-name{position:absolute;left:27.5%;top:41%;transform:translate(-50%,-50%) skewY(-29deg);font-weight:800;font-size:5.2cqw;letter-spacing:.02em;white-space:nowrap;color:#26292d;opacity:.88;mix-blend-mode:multiply;text-shadow:0 1px 0 rgba(255,255,255,.18)}
+.b-name{position:absolute;left:27.5%;top:41%;transform:translate(-50%,-50%) skewY(-29deg);font-family:'Orbitron',var(--f);font-weight:800;font-size:4.6cqw;letter-spacing:.02em;white-space:nowrap;color:#26292d;opacity:.88;mix-blend-mode:multiply;text-shadow:0 1px 0 rgba(255,255,255,.18)}
 .b-glow{position:absolute;right:-20%;bottom:-25%;width:90%;opacity:.5;pointer-events:none}
 .about-inner{position:relative}
 .about-row{display:grid;grid-template-columns:auto 1px minmax(0,440px);gap:clamp(28px,3vw,48px);align-items:center;max-width:64%}
@@ -295,6 +299,8 @@ em{font-style:normal;color:var(--accent)}
 }
 @media (max-width:560px){
   .cta .btn{width:100%}
+  .ptabs{gap:18px}
+  .ptabs a{font-size:14px}
   .lead br,.sec-sub br,.card-body p br{display:none}
   .hero-strip{display:none}
   .stats{flex-direction:column;gap:18px}
