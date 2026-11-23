@@ -4,15 +4,35 @@
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fine = matchMedia('(pointer:fine)').matches;
 
-  // Form: no backend, so hand off to the user's mail client.
-  const form = $('#form'), note = $('#formNote');
-  form.addEventListener('submit', e => {
+  // Contact form -> emailed to contact@nervtech.in via FormSubmit (static site, no backend of its own).
+  // shortcut: FormSubmit needs a one-time "Activate Form" click from the contact@ inbox; move to an own backend if volume grows.
+  const MAIL = 'contact@nervtech.in';
+  const form = $('#form'), note = $('#formNote'), sendBtn = form.querySelector('button[type=submit]');
+  form.addEventListener('submit', async e => {
     e.preventDefault();
-    if (!form.checkValidity()) { note.textContent = 'Please fill in name, a valid email and a message.'; return; }
-    const d = new FormData(form);
-    location.href = `mailto:hello@nervtech.in?subject=${encodeURIComponent('NERV TECH enquiry from ' + d.get('name'))}&body=${encodeURIComponent(d.get('message') + '\n\n' + d.get('name') + ' <' + d.get('email') + '>')}`;
-    note.textContent = 'Opening your mail app…';
+    if (!form.checkValidity()) { note.textContent = 'Please fill in your name, a valid email and a message.'; return; }
+    const d = Object.fromEntries(new FormData(form));
+    if (d._honey) return; // bot filled the hidden field
+    sendBtn.disabled = true; note.textContent = 'Sending…';
+    try {
+      const r = await fetch(`https://formsubmit.co/ajax/${MAIL}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ name: d.name, email: d.email, message: d.message, _replyto: d.email,
+          _subject: `NERV TECH website — ${d.topic || 'Enquiry'} from ${d.name}`, _template: 'table', _captcha: 'false' })
+      });
+      const res = await r.json().catch(() => ({}));
+      if (!r.ok || String(res.success) !== 'true') throw new Error(res.message || r.status);
+      form.reset(); note.textContent = 'Thanks — your message has been sent. We’ll get back to you soon.';
+    } catch {
+      note.innerHTML = `Couldn’t send right now. Please email us at <a href="mailto:${MAIL}">${MAIL}</a>.`;
+    } finally { sendBtn.disabled = false; }
   });
+  // "Request a Demo" buttons tag the enquiry with the product and start the message for the visitor.
+  $$('[data-demo]').forEach(b => b.addEventListener('click', () => {
+    form.topic.value = 'Demo request: ' + b.dataset.demo;
+    if (!form.message.value.trim()) form.message.value = `Hi, I'd like a demo of ${b.dataset.demo}.`;
+  }));
 
   // Mobile menu
   const burger = $('#burger'), links = $('#links');

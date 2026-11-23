@@ -239,7 +239,7 @@ html.menu-open{overflow:hidden}
 .client p{margin-top:10px;font-size:clamp(14px,1.2vw,17px);font-style:italic;color:#c3c6cb}
 .dep{min-height:250px}
 .dep .card-body h3{font-size:clamp(26px,2.3vw,34px)}
-.dep-link{margin-top:14px;font-size:13px;letter-spacing:.06em;color:var(--accent)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 
 /* 06 contact */
 .contact{background:url(assets/bg-contact.webp) center/cover no-repeat,var(--bg);overflow:hidden;min-height:min(100vh,900px);display:flex;align-items:center}
@@ -254,7 +254,9 @@ html.menu-open{overflow:hidden}
 .form input::placeholder,.form textarea::placeholder{color:#b4b8bd}
 .form input:focus,.form textarea:focus{outline:none;border-color:var(--accent);background:rgba(250,92,25,.05)}
 .form .btn-block{margin-top:6px}
-.form-note{min-height:1.4em;font-size:13px;color:var(--mute)}
+.form-note{min-height:1.4em;font-size:14px;color:#c3c6cb}
+.form-note a{color:var(--accent)}
+.form button[disabled]{opacity:.6;cursor:progress}
 
 /* motion-ready initial state (only when GSAP runs) */
 .js [data-fade],.js [data-reveal]{opacity:0}

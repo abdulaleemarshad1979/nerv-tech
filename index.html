@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Orbitron:wght@700;800&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/hero-bg.webp">
-<link rel="stylesheet" href="styles.css?v=8">
+<link rel="stylesheet" href="styles.css?v=9">
 </head>
 <body>
 
@@ -26,7 +26,6 @@
     <symbol id="i-back" viewBox="0 0 16 16"><path d="M13 8H3M7 4 3 8l4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6 8.5 7 8.5-7"/></g></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></g></symbol>
-    <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></symbol>
   </defs>
 </svg>
 
@@ -85,7 +84,7 @@
       <p class="sec-sub" data-reveal>Operational software and intelligence systems<br>for real-world field deployments.</p>
     </div>
 
-    <a href="https://dmsegpolice.in/" target="_blank" rel="noopener" class="card card-feature" aria-label="Drone Monitoring — open live portal" data-tilt data-reveal>
+    <a href="#product-drone" class="card card-feature" data-tilt data-reveal>
       <div class="feat-art" aria-hidden="true">
         <img class="f-mtn" src="assets/mountains.webp" alt="" loading="lazy">
         <img class="f-glow" src="assets/glow.webp" alt="" loading="lazy">
@@ -100,7 +99,7 @@
     </a>
 
     <div class="cards">
-      <a href="https://officer-8eb52.web.app/" target="_blank" rel="noopener" class="card" aria-label="TRACK — open officer app" data-tilt data-reveal>
+      <a href="#product-track" class="card" data-tilt data-reveal>
         <svg class="card-art" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
           <g stroke="#3a3f45" stroke-width=".9" fill="none"><path d="M30 0 L90 60 L60 130 L110 200M90 60 L170 40 L240 0M170 40 L190 120 L130 150 L60 130M190 120 L270 110 L320 60M190 120 L230 200M130 150 L150 200M270 110 L320 160M240 0 L270 110"/></g>
           <path class="draw" d="M130 150 L190 120 L230 96 L262 70 L300 66" stroke="var(--accent)" stroke-width="2" fill="none"/>
@@ -137,8 +136,8 @@
         <h2 class="h2 xl pa">Drone<br>Monitoring</h2>
         <p class="lead pa">Live drone operations, mission monitoring,<br>video feeds, and field deployment.</p>
         <div class="cta pa">
-          <a href="#contact" class="btn btn-solid magnetic">Request a Demo <svg class="ic"><use href="#i-arrow"/></svg></a>
-          <a href="https://dmsegpolice.in/" target="_blank" rel="noopener" class="btn btn-outline magnetic">Open Live Portal <svg class="ic"><use href="#i-arrow"/></svg></a>
+          <a href="#contact" class="btn btn-solid magnetic" data-demo="Drone Monitoring">Request a Demo <svg class="ic"><use href="#i-arrow"/></svg></a>
+          <a href="#capabilities" class="btn btn-outline magnetic">Product Overview</a>
         </div>
       </div>
       <div class="devices pa"><img class="d-glow" src="assets/glow.webp" alt="" aria-hidden="true" loading="lazy"><img class="d-img" src="assets/devices.webp" alt="NERV TECH Drone Monitoring console on laptop and phone" width="1448" height="1086" loading="lazy"></div>
@@ -158,8 +157,8 @@
         <h2 class="h2 xl pa">TRACK<br><em>Field Ops.</em></h2>
         <p class="lead pa">Field force tracking, duty management and reporting — officers and beats on one live map.</p>
         <div class="cta pa">
-          <a href="#contact" class="btn btn-solid magnetic">Request a Demo <svg class="ic"><use href="#i-arrow"/></svg></a>
-          <a href="https://officer-8eb52.web.app/" target="_blank" rel="noopener" class="btn btn-outline magnetic">Open Officer App <svg class="ic"><use href="#i-arrow"/></svg></a>
+          <a href="#contact" class="btn btn-solid magnetic" data-demo="TRACK">Request a Demo <svg class="ic"><use href="#i-arrow"/></svg></a>
+          <a href="#capabilities" class="btn btn-outline magnetic">Product Overview</a>
         </div>
       </div>
       <div class="console pa" aria-hidden="true">
@@ -202,7 +201,7 @@
         <h2 class="h2 xl pa">CCTV<br>Intelligence</h2>
         <p class="lead pa">Multi-camera monitoring and automated<br>insights across your camera network.</p>
         <div class="cta pa">
-          <a href="#contact" class="btn btn-solid magnetic">Request a Demo <svg class="ic"><use href="#i-arrow"/></svg></a>
+          <a href="#contact" class="btn btn-solid magnetic" data-demo="CCTV Intelligence">Request a Demo <svg class="ic"><use href="#i-arrow"/></svg></a>
           <a href="#capabilities" class="btn btn-outline magnetic">Product Overview</a>
         </div>
       </div>
@@ -273,12 +272,12 @@
         <div class="client-logo"><img src="assets/eg-police.webp" alt="East Godavari District Police emblem" width="320" height="320" loading="lazy"></div>
         <div><h3>East Godavari District Police</h3><p>Your Safety is Our Responsibility</p></div>
       </div>
-      <a href="https://dmsegpolice.in/" target="_blank" rel="noopener" class="card dep" data-tilt data-reveal>
-        <div class="card-body"><svg class="ico acc"><use href="#i-drone"/></svg><h3>Drone Monitoring</h3><p>Live drone operations and mission monitoring.</p><span class="dep-link mono">dmsegpolice.in</span></div>
+      <a href="#product-drone" class="card dep" data-tilt data-reveal>
+        <div class="card-body"><svg class="ico acc"><use href="#i-drone"/></svg><h3>Drone Monitoring</h3><p>Live drone operations and mission monitoring.</p></div>
         <svg class="go"><use href="#i-arrow"/></svg>
       </a>
-      <a href="https://officer-8eb52.web.app/" target="_blank" rel="noopener" class="card dep" data-tilt data-reveal>
-        <div class="card-body"><svg class="ico acc"><use href="#i-layers"/></svg><h3>TRACK</h3><p>Field force tracking and duty management.</p><span class="dep-link mono">Officer app</span></div>
+      <a href="#product-track" class="card dep" data-tilt data-reveal>
+        <div class="card-body"><svg class="ico acc"><use href="#i-layers"/></svg><h3>TRACK</h3><p>Field force tracking and duty management.</p></div>
         <svg class="go"><use href="#i-arrow"/></svg>
       </a>
     </div>
@@ -292,12 +291,13 @@
       <p class="eyebrow mono sm" data-reveal>/ 06&nbsp; Contact</p>
       <h2 class="h2 xl" data-split>Let’s<br>Build<br><em>Together.</em></h2>
       <ul class="info" data-reveal>
-        <li><svg class="ico-s"><use href="#i-mail"/></svg><a href="mailto:hello@nervtech.in">hello@nervtech.in</a></li>
+        <li><svg class="ico-s"><use href="#i-mail"/></svg><a href="mailto:contact@nervtech.in">contact@nervtech.in</a></li>
         <li><svg class="ico-s"><use href="#i-pin"/></svg>Rajahmundry, India</li>
-        <li><svg class="ico-s"><use href="#i-github"/></svg><a href="https://github.com/nerv-tech" target="_blank" rel="noopener">github.com/nerv-tech</a></li>
       </ul>
     </div>
     <form class="form" id="form" data-reveal novalidate>
+      <input type="hidden" name="topic" value="">
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <label><span class="sr">Name</span><input name="name" placeholder="Name" autocomplete="name" required></label>
       <label><span class="sr">Email</span><input name="email" type="email" placeholder="Email" autocomplete="email" required></label>
       <label><span class="sr">Message</span><textarea name="message" rows="6" placeholder="Message" required></textarea></label>
@@ -311,6 +311,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="main.js?v=8"></script>
+<script src="main.js?v=9"></script>
 </body>
 </html>
