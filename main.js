@@ -42,7 +42,7 @@
 
   // Product panels (Drone / TRACK / CCTV): one visible at a time; switched by tabs, hero strip and cards.
   let motion = false, seen = false;
-  const animIn = p => { seen = true; gsap.fromTo($$('.pa', p), { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: .9, ease: 'expo.out', stagger: .07, overwrite: true }); };
+  const animIn = p => { seen = true; gsap.fromTo($$('.pa', p), { y: 40, opacity: 0, rotationY: -14, transformPerspective: 1200 }, { y: 0, opacity: 1, rotationY: 0, duration: 1, ease: 'expo.out', stagger: .07, overwrite: true }); };
   const showPanel = id => {
     const next = document.getElementById(id);
     if (!next) return;
@@ -106,7 +106,8 @@
   // ---------- Generic reveals (batched so siblings stagger)
   ScrollTrigger.batch('[data-reveal]', {
     start: 'top 90%',
-    onEnter: els => gsap.fromTo(els, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: 'expo.out', stagger: 0.12, overwrite: true })
+    // 3D flip-up: blocks rise out of the page plane
+    onEnter: els => gsap.fromTo(els, { y: 50, opacity: 0, rotationX: -22, transformPerspective: 1100, transformOrigin: '50% 100%' }, { y: 0, opacity: 1, rotationX: 0, duration: 1.2, ease: 'expo.out', stagger: 0.12, overwrite: true })
   });
 
   // ---------- Parallax
@@ -125,7 +126,7 @@
   drift('.f-mtn', -6, 8); drift('.f-drone', 14, -14); drift('.d-img', 6, -6);
 
   // About building rises in
-  gsap.fromTo('.b-wrap', { yPercent: 14, xPercent: 6 }, { yPercent: 0, xPercent: 0, ease: 'none', scrollTrigger: { trigger: '.about', start: 'top bottom', end: 'center center', scrub: true } });
+  gsap.fromTo('.b-wrap', { yPercent: 14, xPercent: 6, rotationY: -24, transformPerspective: 1400 }, { yPercent: 0, xPercent: 0, rotationY: 0, ease: 'none', scrollTrigger: { trigger: '.about', start: 'top bottom', end: 'center center', scrub: true } });
 
   // Counter
   $$('.count').forEach(el => {
@@ -163,7 +164,11 @@
     $$('[data-tilt]').forEach(c => {
       const rx = gsap.quickTo(c, 'rotationX', { duration: .6, ease: 'power3' }), ry = gsap.quickTo(c, 'rotationY', { duration: .6, ease: 'power3' });
       gsap.set(c, { transformPerspective: 1100 });
-      c.addEventListener('mousemove', e => { const r = c.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - .5) * 5); rx(-((e.clientY - r.top) / r.height - .5) * 5); });
+      c.addEventListener('mousemove', e => {
+        const r = c.getBoundingClientRect(), fx = (e.clientX - r.left) / r.width, fy = (e.clientY - r.top) / r.height;
+        ry((fx - .5) * 10); rx(-(fy - .5) * 10);
+        c.style.setProperty('--gx', fx * 100 + '%'); c.style.setProperty('--gy', fy * 100 + '%');
+      });
       c.addEventListener('mouseleave', () => { rx(0); ry(0); });
     });
   }
